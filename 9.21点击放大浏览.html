@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/9.21点击放大浏览.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		ul{
+			width: 1200px;
+			height: 600px;
+			margin: 20px auto;
+			border: 1px solid #000;
+		}
+		ul li{
+			width: 380px;
+			height: 230px;
+			background: red;
+			float: left;
+			margin: 10px;
+		}
+		ul li img{
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+		.mask{
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.3);
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			transform: scale(0,0);
+			transition: all 2s;
+		}
+		.active{
+			transform: scale(1,1);
+			
+		}
+		/*body:hover .mask{
+			transform: scale(1,1);
+		}*/
+		.mask .bigImg{
+			width: 600px;
+			height: 550px;
+		} 
+		a[class^='btn']{
+			text-decoration: none;
+			color: #333;
+			display: block;
+			width: 50px;
+			height: 80px;
+			background: #CCCCCC;
+			text-align: center;
+			line-height: 80px;
+			font-size: 30px;
+		}
+	</style>
+	<body>
+		<ul>
+			<li><img src="img/1.png"/></li>
+			<li><img src="img/2.png"/></li>
+			<li><img src="img/3.png"/></li>
+			<li><img src="img/4.png"/></li>
+			<li><img src="img/5.png"/></li>
+			<li><img src="img/6.png"/></li>
+		</ul>
+		<div class="mask " >
+			<a href="javascript:void(false);" class="btnL">&lt;</a>
+			<img src="img/hyhu-6.jpg" class="bigImg"/>
+			<a href="javascript:void(false);" class="btnR">&gt;</a>
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$("li").click(function(){
+			let src1 = $(this).children('img').attr("src");
+			console.log(src1)
+			$(".mask").addClass("active");
+			$(".bigImg").attr("src",src1);
+		})
+	
+		$(".mask").click(function(){
+			$(this).removeClass("active")
+		})
+		let index=0;
+		$(".btnR").click(function(e){
+			e.stopPropagation();
+			index++;
+			if(index==$("li").length){
+				index=0;
+			}
+			let src2 = $("li").eq(index).children("img").attr("src");
+			$(".bigImg").attr("src",src2);
+		})
+		$('.btnL').click(function(e){
+			e.stopPropagation();
+			index--;
+			if(index==-1){
+				index=5;
+			}
+
+			let src3 = $('li').eq(index).children("img").attr("src");
+			$(".bigImg").attr("src",src3);
+		})
+	
+	})
+</script>
